@@ -1,4 +1,3 @@
-# main.py - VK Bot
 import vk_api
 from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
 
@@ -13,29 +12,30 @@ try:
     longpoll = VkBotLongPoll(vk_session, GROUP_ID)
     vk = vk_session.get_api()
     
-    print("✅ Бот авторизован!")
+    print("✅ Бот авторизован! Ожидаем сообщения...")
     
     for event in longpoll.listen():
         if event.type == VkBotEventType.MESSAGE_NEW:
             msg = event.object.message['text']
-            peer_id = event.object.message['peer_id']
+            user_id = event.object.message['from_id']
+            chat_id = event.object.message['peer_id']
             
             if msg.lower() == '/help':
                 vk.messages.send(
-                    peer_id=peer_id,
-                    message='🤖 Бот работает! /help /жив',
+                    peer_id=chat_id,
+                    message='🤖 Бот работает! /help /жив /id',
                     random_id=0
                 )
             elif msg.lower() == '/жив':
                 vk.messages.send(
-                    peer_id=peer_id,
+                    peer_id=chat_id,
                     message='✅ Я жив!',
-                    elif msg.lower() == '/id':
-    vk.messages.send(
-        peer_id=chat_id,
-        message=f'🆔 ID этой беседы: `{chat_id}`',
-        random_id=0
-    )
+                    random_id=0
+                )
+            elif msg.lower() == '/id':
+                vk.messages.send(
+                    peer_id=chat_id,
+                    message=f'🆔 ID этой беседы: {chat_id}',
                     random_id=0
                 )
                 
