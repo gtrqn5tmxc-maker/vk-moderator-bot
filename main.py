@@ -30,6 +30,12 @@ try:
                 vk.messages.send(
                     peer_id=peer_id,
                     message='✅ Я жив!',
+                    elif msg.lower() == '/id':
+    vk.messages.send(
+        peer_id=chat_id,
+        message=f'🆔 ID этой беседы: `{chat_id}`',
+        random_id=0
+    )
                     random_id=0
                 )
                 
